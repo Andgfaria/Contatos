@@ -11,6 +11,8 @@
 
 @interface ViewControllerEdicaoContato : UIViewController {
     Contato *contato;
+    UIActionSheet *opcoesAlterarFoto;
+    UIActionSheet *opcoesAdicionarFoto;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil contato:(Contato *)c;
@@ -20,6 +22,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtTelefone;
 @property (weak, nonatomic) IBOutlet UITextField *txtCelular;
 @property (weak, nonatomic) IBOutlet UITextField *txtEndereco;
+@property (weak, nonatomic) IBOutlet UIButton *btnAlterarFoto;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnAdicionarFoto;
+- (IBAction)alterarFoto:(id)sender;
+- (IBAction)adicionarFoto:(id)sender;
 
 @end
