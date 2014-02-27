@@ -16,8 +16,9 @@
 @property NSNumber *telefone;
 @property NSNumber *celular;
 @property NSString *endereco;
+@property UIImage *foto;
 
 -(id)init;
--(id)initWithNome:(NSString *)n eSobrenome:(NSString *)s eTelefone:(NSNumber *)t eCelular:(NSNumber *)c eEndereco:(NSString *)e;
+-(id)initWithNome:(NSString *)n eSobrenome:(NSString *)s eTelefone:(NSNumber *)t eCelular:(NSNumber *)c eEndereco:(NSString *)e eFoto:(UIImage *)f;
 
 @end

@@ -84,9 +84,66 @@
     NSNumber *telefone = [formatador numberFromString:[_txtTelefone text]];
     NSNumber *celular = [formatador numberFromString:[_txtCelular text]];
     NSString *endereco = [[NSString alloc] initWithString:[_txtEndereco text]];
-    Contato *novo = [[Contato alloc] initWithNome:nome eSobrenome:sobrenome eTelefone:telefone eCelular:celular eEndereco:endereco];
+    Contato *novo = [[Contato alloc] initWithNome:nome eSobrenome:sobrenome eTelefone:telefone eCelular:celular eEndereco:endereco eFoto:_imagemContato.image];
     NSData *cadastro = [NSKeyedArchiver archivedDataWithRootObject:novo];
     [[NSUserDefaults standardUserDefaults] setObject:cadastro forKey:@"novoContato"];
     [[self navigationController] popViewControllerAnimated:YES];
 }
+- (IBAction)foto:(id)sender {
+    UIActionSheet *novo = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:nil otherButtonTitles:@"Tirar Foto",@"Escolher Foto Existente", nil];
+    [novo showInView:self.view];
+    }
+
+- (void)actionSheet:(UIActionSheet *)popup clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+            [self tirarFoto];
+            break;
+        case 1:
+            [self selecionarFotoExistente];
+            break;
+        default:
+            break;
+    }
+}
+
+-(void) tirarFoto {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    [imagePicker setDelegate:self];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    else {
+        UIAlertView *alerta = [[UIAlertView alloc] initWithTitle:@"Câmera Não Disponível" message:@"Este dispositivo não possui uma câmera para tirar foto." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alerta show];
+    }
+}
+
+-(void) selecionarFotoExistente {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    [imagePicker setDelegate:self];
+    [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    [self presentViewController:imagePicker animated:YES completion:nil];
+   
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *imagemEscolhida = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *imagemRedimensionada = [self imageWithImage:imagemEscolhida scaledToSize:CGSizeMake(128, 128)];
+    [_imagemContato setImage:imagemRedimensionada];
+    _imagemContato.contentMode = UIViewContentModeScaleAspectFit;
+    [_imagemContato setHidden:NO];
+    [_btnTirarFoto setHidden:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 @end

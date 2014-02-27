@@ -16,5 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtCelular;
 @property (weak, nonatomic) IBOutlet UITextField *txtTelefone;
 @property (weak, nonatomic) IBOutlet UITextField *txtEndereco;
+@property (weak, nonatomic) IBOutlet UIImageView *imagemContato;
+@property (weak, nonatomic) IBOutlet UIButton *btnTirarFoto;
+- (IBAction)foto:(id)sender;
 
 @end

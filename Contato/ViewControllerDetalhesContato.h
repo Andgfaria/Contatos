@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *txtTelefone;
 @property (weak, nonatomic) IBOutlet UILabel *txtCelular;
 @property (weak, nonatomic) IBOutlet UILabel *txtEndereco;
+@property (weak, nonatomic) IBOutlet UIImageView *imagemContato;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil contato:(Contato *)c;
 
 @end

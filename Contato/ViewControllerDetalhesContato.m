@@ -51,6 +51,7 @@
     [_txtTelefone setText:[NSString stringWithFormat:@"Telefone: %@",[contato.telefone stringValue]]];
     [_txtCelular setText:[NSString stringWithFormat:@"Celular: %@",[contato.celular stringValue]]];
     [_txtEndereco setText:contato.endereco];
+    [_imagemContato setImage:contato.foto];
 
 }
 

@@ -84,6 +84,7 @@
     NSString *nome = [[listaContatos[indexPath.section] objectAtIndex:[indexPath row]] nome];
     NSString *sobrenome = [[listaContatos[indexPath.section] objectAtIndex:[indexPath row]] sobrenome];
     [[cell textLabel] setText:[NSString stringWithFormat:@"%@ %@",nome,sobrenome]];
+    [[cell imageView] setImage:[self imageWithImage:[[listaContatos[indexPath.section] objectAtIndex:indexPath.row] foto] scaledToSize:CGSizeMake(36, 36)]];
 
     return cell;
 }
@@ -186,6 +187,14 @@
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
     ViewControllerDetalhesContato *viewContato = [[ViewControllerDetalhesContato alloc] initWithNibName:@"ViewDetalhesContato" bundle:nil contato:[listaContatos[indexPath.section] objectAtIndex:indexPath.row]];
     [[self navigationController] pushViewController:viewContato animated:YES];
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 

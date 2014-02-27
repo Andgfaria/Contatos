@@ -15,6 +15,7 @@
 @synthesize telefone;
 @synthesize celular;
 @synthesize endereco;
+@synthesize foto;
 
 -(id)init {
     self = [super init];
@@ -29,7 +30,7 @@
     return self;
 }
 
--(id)initWithNome:(NSString *)n eSobrenome:(NSString *)s eTelefone:(NSNumber *)t eCelular:(NSNumber *)c eEndereco:(NSString *)e {
+-(id)initWithNome:(NSString *)n eSobrenome:(NSString *)s eTelefone:(NSNumber *)t eCelular:(NSNumber *)c eEndereco:(NSString *)e eFoto:(UIImage *)f{
     self = [super init];
     if (self) {
         nome = n;
@@ -37,6 +38,7 @@
         telefone = t;
         celular = c;
         endereco = e;
+        foto = f;
     }
     return self;
 }
@@ -49,6 +51,7 @@
         telefone = [aDecoder decodeObjectForKey:@"telefone"];
         celular = [aDecoder decodeObjectForKey:@"celular"];
         endereco = [aDecoder decodeObjectForKey:@"endereco"];
+        foto = [aDecoder decodeObjectForKey:@"foto"];
     }
     return self;
 }
@@ -59,6 +62,7 @@
     [aCoder encodeObject:telefone forKey:@"telefone"];
     [aCoder encodeObject:celular forKey:@"celular"];
     [aCoder encodeObject:endereco forKey:@"endereco"];
+    [aCoder encodeObject:foto forKey:@"foto"];
 }
 
 @end
